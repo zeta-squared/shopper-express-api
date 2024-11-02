@@ -1,0 +1,13 @@
+{
+	"exclude": ["**/*.ts"],
+	"compilerOptions": {
+		"module": "nodenext",
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"noEmitOnError": true,
+		"target": "es2017",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"resolveJsonModule": true
+	}
+}

@@ -1,0 +1,290 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Shopper API",
+		"version": "1.0"
+	},
+	"host": "localhost:5000",
+	"basePath": "/api",
+	"schemes": "https",
+	"tags": [{"name": "Users"}, {"name": "Tokens"}],
+	"paths": {
+		"/users": {
+			"post": {
+				"tags": ["Users"],
+				"summary": "Register a new user",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {"$ref": "#/components/schemas/User"}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/User"}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/me": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Retrieve authenticated user information",
+				"security": [{"bearerAuth": []}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/User"}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {
+							"applciation/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{username}": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Retrieve a user by username",
+				"parameters": [{"name": "username", "in": "path", "required": true, "schema": {"type": "string"}}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/User"}
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tokens": {
+			"post": {
+				"tags": ["Tokens"],
+				"summary": "Issue a new access and refresh token",
+				"description": "Returns an access token and refresh token. The access token has a duration of 15 minutes. The refresh token is sent as a secure HTTP cookie to reduce the likelihood of cross-site scripting.",
+				"security": [
+					{"basicAuth": []}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Token"}
+							}
+						}
+					},
+					"401": {
+						"description": "Invalid username or password",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": ["Tokens"],
+				"summary": "Refresh an access token",
+				"description": "The user's current access token must be sent as a bearer authorisation token. The current refresh token is to be sent in either the body of the request or a cookie. If an expired refresh token is used all user tokens will be revoked for security purposes. The response follows the same format as when a new access and refresh token are issues.",
+				"security": [{"bearerAuth": []}],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {"$ref": "#/components/schemas/Token"}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Token"}
+							}
+						}
+					},
+					"401": {
+						"description": "Invalid access or refresh token",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Tokens"],
+				"summary": "Revoke an access token",
+				"security": [{"bearerAuth": []}],
+				"responses": {
+					"200": {
+						"description": "Token successfully revoked"
+					},
+					"400": {
+						"description": "Bad request - ensure you have sent the complete token string",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					},
+					"401": {
+						"description": "Invalid access token",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shopping": {
+			"get": {
+				"tags": ["Shopping"],
+				"summary": "Get a user's shopping list",
+				"security": [{"bearerAuth": []}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/ShoppingList"}
+							}
+						}
+					},
+					"401": {
+						"description": "Invalid access token",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					},
+					"404": {
+						"description": "Shopping list not found",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["Shopping"],
+				"summary": "Create or update a user's shopping list",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {"$ref": "#/components/schemas/ShoppingList"}
+						}
+					}
+				},
+				"response": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/ShoppingList"}
+							}
+						}
+					},
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/ShoppingList"}
+							}
+						}
+					},
+					"401": {
+						"desription": "Invalid access token",
+						"content": {
+							"application/json": {
+								"schema": {"$ref": "#/components/schemas/Error"}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"basicAuth": {"type": "http", "scheme": "basic"},
+			"bearerAuth": {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
+		},
+		"schemas": {
+			"User": {
+				"type": "object",
+				"properties": {
+					"id": {"type": "integer", "readOnly": true},
+					"username": {"type": "string", "required": true},
+					"email": {"type": "string", "required": true},
+					"password": {"type": "string", "writeOnly": true, "required": true},
+					"avatar_url": {"type": "string", "readOnly": true}
+				}
+			},
+			"Error": {
+				"type": "object",
+				"properties": {
+					"code": {"type": "integer"},
+					"name": {"type": "string"},
+					"description": {"type": "string"},
+					"messages": {"type": "object"}
+				}
+			},
+			"Token": {
+				"type": "object",
+				"properties": {
+					"access_token": {"type": "string", "readOnly": true},
+					"refresh_token": {"type": "string", "writeOnly": true}
+				}
+			},
+			"ShoppingList": {
+				"type": "object",
+				"properties": {
+					"id": {"type": "integer"},
+					"items": {"type": "object", "required": true}
+				}
+			}
+		}
+	}
+}

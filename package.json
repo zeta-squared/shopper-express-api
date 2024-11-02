@@ -1,0 +1,38 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.mjs",
+  "_type": "cannot include since require() of ES modules is not supported by @ariga/ts-atlas-provider-sequelize; what a stupid decision",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ariga/ts-atlas-provider-sequelize": "^0.1.5",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/swagger-ui-express": "^4.1.7",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "hash-wasm": "^4.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.37.4",
+    "sequelize-typescript": "^2.1.6",
+    "sqlite3": "^5.1.7",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.6",
+    "@types/validator": "^13.12.2",
+    "nodemon": "^3.1.7"
+  }
+}

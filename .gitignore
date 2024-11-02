@@ -1,0 +1,5 @@
+node_modules/
+db/shopper.db
+**/*.mjs
+**/*.js
+config/.env
