@@ -38,7 +38,7 @@ Now use `npm start` to start the application. It will run, by default, on `local
 ### Acknowledgements
 The API uses several npm packages. I have listed the main ones here but for a complete list see
 `./package.json`.
-- [Ajv](https://www.ajv.js.org)
+- [Ajv](https://ajv.js.org)
 - [Sequelize](https://www.sequelize.org)
 - [sequelize-typescript](https://www.github.com/sequelize/sequelize-typescript#readme)
 - [hash-wasm](https://www.github.com/Daninet/hash-wasm#readme)
