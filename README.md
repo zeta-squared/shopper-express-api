@@ -1,4 +1,4 @@
-# Shopper API
+# Shopper Express API
 An [Express.js](https://expressjs.com/en) API backend built to support the [shopper](https://github.com/zeta-squared/shopper) React application.
 
 ## Installation
