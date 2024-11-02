@@ -1,5 +1,5 @@
 # Shopper API
-An [Express.js](https://express.js.com/en) API backend built to support the [shopper](https://github.com/zeta-squared/shopper) React application.
+An [Express.js](https://expressjs.com/en) API backend built to support the [shopper](https://github.com/zeta-squared/shopper) React application.
 
 ## Installation
 This API was developed in Node 18.19.1. To avoid any version errors ensure yours is on this release or above
