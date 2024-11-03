@@ -30,6 +30,11 @@ These are just default/dummy values I have included here. You are welcome to cho
 >[!CAUTION]
 >If you ever deploy this application make sure the `SECRET_KEY` is set to something secure. This can be done with the [UUID](https://github.com/uuidjs/uuid#readme) node package or another method of your preference.
 
+I have included all the up to date database migration files (generated with
+[Atlas](https://atlasgo.io/guides/orms/sequelize)) in `./db/migrations`. To initialise the database make sure
+you have `atlas` (this is not an `npm` package so you will need to follow the [installation instructions](https://atlasgo.io/getting-started#installation)) installed and run `atlas migrate apply --env sequelize`. This will create the `sqlite`
+database `./db/shopper.db`.
+
 Now use `npm start` to start the application. It will run, by default, on `localhost:5000`. You can optionally, change the port by using the `EXPRESS_PORT=<port>` variable in `./config/.env`. Documentation of all endpoints can be found at `localhost:<port>/`.
 >[!NOTE]
 >This applciation is not configured for production. If you wish to serve this application please make sure you
