@@ -4,9 +4,7 @@
 		"title": "Shopper API",
 		"version": "1.0"
 	},
-	"host": "localhost:5000",
-	"basePath": "/api",
-	"schemes": "https",
+	"servers": [{"url": "http://localhost:5000/api"}],
 	"tags": [{"name": "Users"}, {"name": "Tokens"}],
 	"paths": {
 		"/users": {

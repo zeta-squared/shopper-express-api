@@ -47,7 +47,6 @@ api.use('/api', shopping);
 
 // error handler
 api.use((err: RouteError, req: Request, res: Response, next: NextFunction): any => {
-	console.log('sending error response');
 	return res.status(err.code).send({
 		code: err.code,
 		name: err.name,
